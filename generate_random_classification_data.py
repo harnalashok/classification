@@ -13,7 +13,7 @@
 # Set constants in para 1.1, save the
 #  file and then run in Anaconda prompt as:
 
-#       python generate_random_data.py
+#       python generate_random_classification_data.py
 
 
 # 1.0 Call libraries
