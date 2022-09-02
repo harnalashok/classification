@@ -1,4 +1,4 @@
-# Last amended: 28th July, 2022
+# Last amended: 2nd Sep, 2022
 # My folder: C:\Users\Ashok\OneDrive\Documents\python
 # Generates data for classification
 #You have control over:
@@ -8,12 +8,14 @@
 #        iv)  How many max/min categorical variables
 #        v)   How many max/min no of columns
 #        vi)  How many NULLS to generate
+#        vii) How to name files
 
 
 # Set constants in para 1.1, save the
 #  file and then run in Anaconda prompt as:
 
-#       python generate_random_classification_data.py
+#   cd C:\Users\Ashok\OneDrive\Documents\python
+#   python generate_random_classification_data.py
 
 
 # 1.0 Call libraries
@@ -25,14 +27,22 @@ import os
 
 # 1.1 ## Set these constants
 #        Folder where your generated csv files will be saved
-#        Folder will be generated if it does not exist
+#        Folder will be generated if it does not exist.
+#        Existing files will be deleted
+
+print("") ; print("")
+print("Working...will take time...")
+
 pathToFolder = r"C:\temp\fake\test"
-# Files will be named as bda25001 to bda2500XX
-rollNumberSeries = 25000    # Class roll numbers
+
+# Dataset specifications:
+# File names will begin from rollNumberSeries
+#  and will go upto (rollNumberSeries + noOfDatasetsToGen)
+rollNumberSeries = 25000    # Class roll numbers begin from here
 
 noOfDatasetsToGen = 60      # So many diff csv files will be created
 
-minSamples = 1000   # Per dataset
+minSamples = 1500   # Per dataset
 maxSamples = 8000   # Per dataset
 
 minFeatures = 15    # Per dataset
@@ -106,7 +116,7 @@ def generate_data( ):
     col_names = col_names_cat
 
 
-    # FInally return generated data
+    # Finally return generated data
     return pd.DataFrame(X, columns = col_names)
 
 
@@ -140,7 +150,7 @@ print("")
 # 3.0 Generate and save files to pathToFolder
 for i in range(noOfDatasetsToGen):
     # Give some name to the dataset
-    name = "bda" +  str(rollNumberSeries + i + 1)+str(".csv")   # Roll numbers are from 25001 to 250060
+    name = str(rollNumberSeries + i + 1)+str(".csv")   # Roll numbers are from 25001 to 250060
     r = generate_data()
     r.to_csv(name, index = False)
 
